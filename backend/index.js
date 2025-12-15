@@ -1,20 +1,29 @@
-const express=require("express")
-const app=express();
+const express = require("express");
 const cors = require("cors");
-const dotenv=require("dotenv");
-const dbconnect = require("./database/dbconfig");
-const router = require("./routes/data");
+const dotenv = require("dotenv");
+const dbconnect = require("../database/dbconfig");
+const router = require("../routes/data");
+
 dotenv.config();
-const PORT=process.env.PORT || 5000
-app.use(express.json())
-dbconnect();
+
+const app = express();
+
+app.use(express.json());
+
 app.use(
   cors({
-    origin: "http://localhost:5173", // ✅ No trailing slash
+    origin: [
+      "http://localhost:5173",
+      "https://your-frontend.vercel.app" // add frontend later
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
-app.use("/api/v1",router)
-app.listen(PORT,()=>console.log(`Server Started At Port Number ${PORT}`))
+dbconnect();
+
+app.use("/api/v1", router);
+
+// ❌ DO NOT USE app.listen
+module.exports = app;
