@@ -6,8 +6,8 @@ const Signin = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: ".",
-    password: ".",
+    email: "",
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
