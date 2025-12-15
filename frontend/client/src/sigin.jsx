@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv"
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -9,6 +10,8 @@ const Signin = () => {
     email: "",
     password: "",
   });
+const url = import.meta.env.VITE_BACKEND_URL;
+console.log("url---", url);
 
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +26,7 @@ const Signin = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/v1/signin", {
+      const response = await fetch(`${url}/v1/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

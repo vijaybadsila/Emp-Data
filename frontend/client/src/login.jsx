@@ -11,7 +11,8 @@ const Login = () => {
     
   });
   const [loading, setLoading] = useState(false);
-
+const url = process.env.BACKEND_URL
+console.log("url---",url)
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
